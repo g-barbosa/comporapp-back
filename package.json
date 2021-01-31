@@ -5,10 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "jest passWithNoTests --watch",
-    "test:staged": "jest --passWithNoTests -watch"
+    "test:staged": "jest --passWithNoTests -watch",
+    "knex:migrate": "knex --knexfile knexfile.ts migrate:latest",
+    "knex:seed": "knex --knexfile knexfile.ts seed:run"
   },
   "keywords": [],
-  "author": "",
+  "author": "Giovanne Brito Barbosa",
   "license": "ISC",
   "devDependencies": {
     "@types/jest": "^26.0.15",
