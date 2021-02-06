@@ -38,6 +38,7 @@ export class AccountController {
 
       return ok(loginInformations)
     } catch (err) {
+      console.error(err)
       return serverError()
     }
   }
