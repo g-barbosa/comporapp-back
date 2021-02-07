@@ -3,7 +3,7 @@ import { badRequest, ok, serverError } from '../../../infra/crossCutting/helpers
 import { InvalidParamError, MissingParamError } from '../../../infra/crossCutting/errors'
 import { EmailValidator, HttpResponse, HttpRequest } from '../../../infra/crossCutting/protocols'
 import { MakeLogin } from '../../../domain/model/login'
-import { AddAccount } from '../../../domain/model/usecases/add-account'
+import { AddAccount } from '../../../domain/model/usecases/addAccount'
 
 export class AccountController {
   private readonly emailValidator: EmailValidator
@@ -41,7 +41,6 @@ export class AccountController {
 
       return ok(loginInformations)
     } catch (err) {
-      console.error(err)
       return serverError()
     }
   }
