@@ -3,7 +3,7 @@ import { AccountController } from '../account/account'
 import { response } from 'express'
 import { MissingParamError, InvalidParamError, ServerError } from '../../../infra/crossCutting/errors'
 import { MakeLogin, MakeLoginModel } from '../../../domain/model/login'
-import { AddAccount, AddAccountModel } from '../../../domain/model/usecases/add-account'
+import { AddAccount, AddAccountModel } from '../../../domain/model/usecases/addAccount'
 import { AccountModel } from '../../../domain/model/account'
 
 const makeEmailValidator = (): EmailValidator => {
