@@ -1,2 +1,2 @@
-export * from './emailValidator'
-export * from './http'
+export * from './IEmailValidator'
+export * from './IHttp'

@@ -4,7 +4,11 @@ module.exports = {
   collectCoverageFrom: [
     '<rootDir>/src/**/*.ts',
     '!<rootDir>/src/**/*-protocols.ts',
-    '!**/protocols/**'
+    '!**/protocols/**',
+    '!<rootDir>/src/**/*I[A-Z]*.ts'
+  ],
+  coveragePathIgnorePatterns: [
+    '<rootDir>/src/I[A-Z]*.ts'
   ],
   coverageDirectory: 'coverage',
   coverageProvider: 'v8',

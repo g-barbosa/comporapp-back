@@ -1,10 +1,10 @@
-import { EmailValidator } from '../../../infra/crossCutting/protocols'
-import { AccountController } from '../account/account'
+import { EmailValidator } from '../../../infra/crossCutting/protocols/Index'
+import { AccountController } from './Account'
 import { response } from 'express'
-import { MissingParamError, InvalidParamError, ServerError } from '../../../infra/crossCutting/errors'
-import { MakeLogin, MakeLoginModel } from '../../../domain/model/login'
-import { AddAccount, AddAccountModel } from '../../../domain/model/usecases/addAccount'
-import { AccountModel } from '../../../domain/model/account'
+import { MissingParamError, InvalidParamError, ServerError } from '../../../infra/crossCutting/errors/Index'
+import { MakeLogin, MakeLoginModel } from '../../../domain/model/ILogin'
+import { AddAccount, AddAccountModel } from '../../../domain/model/usecases/IAddAccount'
+import { AccountModel } from '../../../domain/model/IAccount'
 
 const makeEmailValidator = (): EmailValidator => {
   class EmailValidatorStub implements EmailValidator {
