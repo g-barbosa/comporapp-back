@@ -1,8 +1,6 @@
-export interface MakeLoginModel {
+export interface AccountModel {
+  id: string
+  name: string
   email: string
   password: string
-}
-
-export interface MakeLogin {
-  login: (user: MakeLoginModel) => Promise<MakeLoginModel>
 }
