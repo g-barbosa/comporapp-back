@@ -43,7 +43,7 @@ export class AccountController {
     } catch (err) {
       return serverError()
     }
-  }
+  };
 
   async createAccount (httpRequest: HttpRequest, response: Response): Promise<HttpResponse> {
     try {
@@ -70,5 +70,5 @@ export class AccountController {
     } catch (error) {
       return serverError()
     }
-  }
+  };
 }

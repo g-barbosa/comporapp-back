@@ -16,5 +16,5 @@ export class AccountRepository implements AddAccount {
       email: 'string',
       password: 'string'
     }))
-  }
+  };
 }
