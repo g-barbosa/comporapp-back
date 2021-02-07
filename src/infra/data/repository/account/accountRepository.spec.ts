@@ -1,5 +1,5 @@
-import { AccountRepository } from '../../../../infra/data/repository/account/accountRepository'
-import { Encrypter } from '../../../crossCutting/protocols/encrypter'
+import { AccountRepository } from './AccountRepository'
+import { Encrypter } from '../../../crossCutting/protocols/IEncrypter'
 
 interface SutTypes {
   sut: AccountRepository

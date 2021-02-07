@@ -1,6 +1,6 @@
-import { AccountModel } from '../../../../domain/model/account'
-import { AddAccount, AddAccountModel } from '../../../../domain/model/usecases/addAccount'
-import { Encrypter } from '../../../crossCutting/protocols/encrypter'
+import { AccountModel } from '../../../../domain/model/IAccount'
+import { AddAccount, AddAccountModel } from '../../../../domain/model/usecases/IAddAccount'
+import { Encrypter } from '../../../crossCutting/protocols/IEncrypter'
 
 export class AccountRepository implements AddAccount {
   private readonly encrypter: Encrypter
