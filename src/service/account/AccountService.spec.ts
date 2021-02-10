@@ -1,10 +1,10 @@
-import { EmailValidator } from '../../../infra/crossCutting/protocols/Index'
-import { AccountController } from './Account'
+import { EmailValidator } from '../../infra/crossCutting/protocols/Index'
+import { AccountService } from './AccountService'
 import { response } from 'express'
-import { MissingParamError, InvalidParamError, ServerError } from '../../../infra/crossCutting/errors/Index'
-import { MakeLogin, MakeLoginModel } from '../../../domain/model/ILogin'
-import { AddAccount, AddAccountModel } from '../../../domain/model/usecases/IAddAccount'
-import { AccountModel } from '../../../domain/model/IAccount'
+import { MissingParamError, InvalidParamError, ServerError } from '../../infra/crossCutting/errors/Index'
+import { MakeLogin, MakeLoginModel } from '../../domain/model/ILogin'
+import { AddAccount, AddAccountModel } from '../../domain/model/usecases/IAddAccount'
+import { AccountModel } from '../../domain/model/IAccount'
 
 const makeEmailValidator = (): EmailValidator => {
   class EmailValidatorStub implements EmailValidator {
@@ -44,7 +44,7 @@ const makeLogin = (): MakeLogin => {
 }
 
 interface SutTypes {
-  sut: AccountController
+  sut: AccountService
   emailValidatorStub: EmailValidator
   loginStub: MakeLogin
   addAccountStub: AddAccount
@@ -54,7 +54,7 @@ const makeSut = (): SutTypes => {
   const emailValidatorStub = makeEmailValidator()
   const loginStub = makeLogin()
   const addAccountStub = makeAddAccount()
-  const sut = new AccountController(emailValidatorStub, loginStub, addAccountStub)
+  const sut = new AccountService(emailValidatorStub, loginStub, addAccountStub)
   return {
     sut,
     emailValidatorStub,
