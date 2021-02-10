@@ -5,6 +5,7 @@ module.exports = {
     '<rootDir>/src/**/*.ts',
     '!<rootDir>/src/**/*-protocols.ts',
     '!**/protocols/**',
+    '!**/controller/**',
     '!<rootDir>/src/**/*I[A-Z]*.ts'
   ],
   coveragePathIgnorePatterns: [
