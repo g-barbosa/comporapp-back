@@ -1,7 +1,7 @@
-import { AddAccountModel } from '../../../../domain/model/usecases/IAddAccount'
-import { IAccountRepository } from '../../../crossCutting/protocols/IAccountRepository'
-import { AccountModel } from '../../../../domain/model/IAccount'
-import { MongoHelper } from '../helpers/helper'
+import { AddAccountModel } from '../../../../../domain/model/usecases/IAddAccount'
+import { IAccountRepository } from '../../../interface/IAccountRepository'
+import { AccountModel } from '../../../../../domain/model/IAccount'
+import { MongoHelper } from '../../../helpers/mongoHelper'
 
 export class AccountMongoRepository implements IAccountRepository {
   async add (accountData: AddAccountModel): Promise<AccountModel> {

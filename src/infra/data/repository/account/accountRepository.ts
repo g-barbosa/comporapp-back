@@ -1,7 +1,7 @@
 import { AccountModel } from '../../../../domain/model/IAccount'
 import { AddAccount, AddAccountModel } from '../../../../domain/model/usecases/IAddAccount'
 import { Encrypter } from '../../../crossCutting/protocols/Index'
-import { IAccountRepository } from '../../../crossCutting/protocols/IAccountRepository'
+import { IAccountRepository } from '../../interface/IAccountRepository'
 
 export class AccountRepository implements AddAccount {
   private readonly encrypter: Encrypter
