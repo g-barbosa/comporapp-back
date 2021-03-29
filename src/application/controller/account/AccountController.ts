@@ -1,4 +1,3 @@
-import { Response } from 'express'
 import { HttpResponse, HttpRequest } from '../../../infra/crossCutting/protocols/Index'
 import { IAccountService } from '../../../interface/account/IAccountService'
 
@@ -8,11 +7,11 @@ export class AccountController {
     this.service = service
   }
 
-  async login (request: HttpRequest, response: Response): Promise<HttpResponse> {
-    return await this.service.login(request, response)
+  async login (request: HttpRequest): Promise<HttpResponse> {
+    return await this.service.login(request)
   }
 
-  async createAccount (request: HttpRequest, response: Response): Promise<HttpResponse> {
-    return await this.service.createAccount(request, response)
+  async createAccount (request: HttpRequest): Promise<HttpResponse> {
+    return await this.service.createAccount(request)
   }
 }

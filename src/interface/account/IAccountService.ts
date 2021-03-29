@@ -1,7 +1,6 @@
 import { HttpRequest, HttpResponse } from '../../infra/crossCutting/protocols'
-import { Response } from 'express'
 
 export interface IAccountService {
-  login: (request: HttpRequest, response: Response) => Promise<HttpResponse>
-  createAccount: (httpRequest: HttpRequest, response: Response) => Promise<HttpResponse>
+  login: (request: HttpRequest) => Promise<HttpResponse>
+  createAccount: (httpRequest: HttpRequest) => Promise<HttpResponse>
 }
