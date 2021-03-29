@@ -2,7 +2,7 @@ import { EmailValidator } from '../../infra/crossCutting/protocols/Index'
 import { AccountService } from './AccountService'
 import { response } from 'express'
 import { MissingParamError, InvalidParamError, ServerError } from '../../infra/crossCutting/errors/Index'
-import { MakeLogin, MakeLoginModel } from '../../domain/model/ILogin'
+import { MakeLoginModel } from '../../domain/model/ILogin'
 import { AddAccount, AddAccountModel } from '../../domain/model/usecases/IAddAccount'
 import { AccountModel } from '../../domain/model/IAccount'
 
@@ -26,39 +26,31 @@ const makeAddAccount = (): AddAccount => {
       }
       return new Promise(resolve => resolve(fakeAccount))
     }
-  }
-  return new AddAccountStub()
-}
 
-const makeLogin = (): MakeLogin => {
-  class LoginStub implements MakeLogin {
-    async login (user: MakeLoginModel): Promise<MakeLoginModel> {
-      const fakeUser = {
+    async login (login: MakeLoginModel): Promise<MakeLoginModel> {
+      const fakeLogin = {
         email: 'valid_email@mail.com',
         password: 'valid_password'
       }
-      return new Promise(resolve => resolve(fakeUser))
+      return new Promise(resolve => resolve(fakeLogin))
     }
   }
-  return new LoginStub()
+  return new AddAccountStub()
 }
 
 interface SutTypes {
   sut: AccountService
   emailValidatorStub: EmailValidator
-  loginStub: MakeLogin
   addAccountStub: AddAccount
 }
 
 const makeSut = (): SutTypes => {
   const emailValidatorStub = makeEmailValidator()
-  const loginStub = makeLogin()
   const addAccountStub = makeAddAccount()
-  const sut = new AccountService(emailValidatorStub, loginStub, addAccountStub)
+  const sut = new AccountService(emailValidatorStub, addAccountStub)
   return {
     sut,
     emailValidatorStub,
-    loginStub,
     addAccountStub
   }
 }
@@ -140,8 +132,8 @@ describe('Login Account Controller', () => {
   })
 
   test('Should call MakeLogin with correct values', async () => {
-    const { sut, loginStub } = makeSut()
-    const addSpy = jest.spyOn(loginStub, 'login')
+    const { sut, addAccountStub } = makeSut()
+    const addSpy = jest.spyOn(addAccountStub, 'login')
 
     const httpRequest = {
       body: {
@@ -157,8 +149,8 @@ describe('Login Account Controller', () => {
   })
 
   test('Should return 500 if MakeLogin throws', async () => {
-    const { sut, loginStub } = makeSut()
-    jest.spyOn(loginStub, 'login').mockImplementationOnce(async () => {
+    const { sut, addAccountStub } = makeSut()
+    jest.spyOn(addAccountStub, 'login').mockImplementationOnce(async () => {
       return new Promise((resolve, reject) => reject(new Error()))
     })
     const httpRequest = {

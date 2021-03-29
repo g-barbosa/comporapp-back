@@ -1,4 +1,5 @@
 import { AccountModel } from '../../../../domain/model/IAccount'
+import { MakeLoginModel } from '../../../../domain/model/ILogin'
 import { AddAccount, AddAccountModel } from '../../../../domain/model/usecases/IAddAccount'
 import { Encrypter } from '../../../crossCutting/protocols/Index'
 import { IAccountRepository } from '../../interface/IAccountRepository'
@@ -16,4 +17,9 @@ export class AccountRepository implements AddAccount {
     const account = await this.addAccountRepository.add(Object.assign({}, accountData, { password: hashedPassword }))
     return account
   };
+
+  async login (login: MakeLoginModel): Promise<MakeLoginModel> {
+    const loginResult = await this.addAccountRepository.login(login)
+    return loginResult
+  }
 }

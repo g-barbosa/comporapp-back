@@ -2,18 +2,15 @@ import { Response } from 'express'
 import { badRequest, ok, serverError } from '../../infra/crossCutting/helpers/HttpHelpers'
 import { InvalidParamError, MissingParamError } from '../../infra/crossCutting/errors'
 import { EmailValidator, HttpResponse, HttpRequest } from '../../infra/crossCutting/protocols'
-import { MakeLogin } from '../../domain/model/ILogin'
 import { AddAccount } from '../../domain/model/usecases/IAddAccount'
 import { IAccountService } from '../../interface/account/IAccountService'
 
 export class AccountService implements IAccountService {
   private readonly emailValidator: EmailValidator
-  private readonly makeLogin: MakeLogin
   private readonly addAccount: AddAccount
 
-  constructor (emailValidator: EmailValidator, makeLogin: MakeLogin, addAccount: AddAccount) {
+  constructor (emailValidator: EmailValidator, addAccount: AddAccount) {
     this.emailValidator = emailValidator
-    this.makeLogin = makeLogin
     this.addAccount = addAccount
   }
 
@@ -35,7 +32,7 @@ export class AccountService implements IAccountService {
         return badRequest(new InvalidParamError('email'))
       }
 
-      const loginInformations = await this.makeLogin.login({
+      const loginInformations = await this.addAccount.login({
         email,
         password
       })
