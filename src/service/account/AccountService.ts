@@ -1,4 +1,3 @@
-import { Response } from 'express'
 import { badRequest, ok, serverError } from '../../infra/crossCutting/helpers/HttpHelpers'
 import { InvalidParamError, MissingParamError } from '../../infra/crossCutting/errors'
 import { EmailValidator, HttpResponse, HttpRequest } from '../../infra/crossCutting/protocols'
@@ -14,7 +13,7 @@ export class AccountService implements IAccountService {
     this.addAccount = addAccount
   }
 
-  async login (request: HttpRequest, response: Response): Promise<HttpResponse> {
+  async login (request: HttpRequest): Promise<HttpResponse> {
     try {
       const requiredFields = ['email', 'password']
 
@@ -43,7 +42,7 @@ export class AccountService implements IAccountService {
     }
   };
 
-  async createAccount (httpRequest: HttpRequest, response: Response): Promise<HttpResponse> {
+  async createAccount (httpRequest: HttpRequest): Promise<HttpResponse> {
     try {
       const requiredFields = ['name', 'email', 'password', 'passwordConfirmation']
       for (const field of requiredFields) {

@@ -1,6 +1,5 @@
 import { EmailValidator } from '../../infra/crossCutting/protocols/Index'
 import { AccountService } from './AccountService'
-import { response } from 'express'
 import { MissingParamError, InvalidParamError, ServerError } from '../../infra/crossCutting/errors/Index'
 import { MakeLoginModel } from '../../domain/model/ILogin'
 import { AddAccount, AddAccountModel } from '../../domain/model/usecases/IAddAccount'
@@ -64,7 +63,7 @@ describe('Login Account Controller', () => {
         password: 'any_pass'
       }
     }
-    const httpResponse = await sut.login(httpRequest, response)
+    const httpResponse = await sut.login(httpRequest)
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new MissingParamError('email'))
   })
@@ -77,7 +76,7 @@ describe('Login Account Controller', () => {
         email: 'any_email'
       }
     }
-    const httpResponse = await sut.login(httpRequest, response)
+    const httpResponse = await sut.login(httpRequest)
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new MissingParamError('password'))
   })
@@ -92,7 +91,7 @@ describe('Login Account Controller', () => {
         password: 'any_pass'
       }
     }
-    const httpResponse = await sut.login(httpRequest, response)
+    const httpResponse = await sut.login(httpRequest)
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new InvalidParamError('email'))
   })
@@ -109,7 +108,7 @@ describe('Login Account Controller', () => {
         passwordConfirmation: 'any_pass'
       }
     }
-    await sut.login(httpRequest, response)
+    await sut.login(httpRequest)
     expect(isValidSpy).toHaveBeenCalledWith('any_email@mail.com')
   })
 
@@ -126,7 +125,7 @@ describe('Login Account Controller', () => {
         passwordConfirmation: 'any_pass'
       }
     }
-    const httpResponse = await sut.login(httpRequest, response)
+    const httpResponse = await sut.login(httpRequest)
     expect(httpResponse.statusCode).toBe(500)
     expect(httpResponse.body).toEqual(new ServerError())
   })
@@ -141,7 +140,7 @@ describe('Login Account Controller', () => {
         password: 'any_pass'
       }
     }
-    await sut.login(httpRequest, response)
+    await sut.login(httpRequest)
     expect(addSpy).toHaveBeenCalledWith({
       email: 'any_email@mail.com',
       password: 'any_pass'
@@ -159,7 +158,7 @@ describe('Login Account Controller', () => {
         password: 'any_pass'
       }
     }
-    const httpResponse = await sut.login(httpRequest, response)
+    const httpResponse = await sut.login(httpRequest)
     expect(httpResponse.statusCode).toBe(500)
     expect(httpResponse.body).toEqual(new ServerError())
   })
@@ -173,7 +172,7 @@ describe('Login Account Controller', () => {
         password: 'valid_password'
       }
     }
-    const httpResponse = await sut.login(httpRequest, response)
+    const httpResponse = await sut.login(httpRequest)
     expect(httpResponse.statusCode).toBe(200)
     expect(httpResponse.body).toEqual({
       email: 'valid_email@mail.com',
@@ -193,7 +192,7 @@ describe('addAccount Account Controller', () => {
         passwordConfirmation: 'any_pass'
       }
     }
-    const httpResponse = await sut.createAccount(httpRequest, response)
+    const httpResponse = await sut.createAccount(httpRequest)
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new MissingParamError('name'))
   })
@@ -208,7 +207,7 @@ describe('addAccount Account Controller', () => {
         passwordConfirmation: 'any_pass'
       }
     }
-    const httpResponse = await sut.createAccount(httpRequest, response)
+    const httpResponse = await sut.createAccount(httpRequest)
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new MissingParamError('email'))
   })
@@ -223,7 +222,7 @@ describe('addAccount Account Controller', () => {
         passwordConfirmation: 'any_pass'
       }
     }
-    const httpResponse = await sut.createAccount(httpRequest, response)
+    const httpResponse = await sut.createAccount(httpRequest)
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new MissingParamError('password'))
   })
@@ -238,7 +237,7 @@ describe('addAccount Account Controller', () => {
         // passwordConfirmation: 'any_pass'
       }
     }
-    const httpResponse = await sut.createAccount(httpRequest, response)
+    const httpResponse = await sut.createAccount(httpRequest)
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new MissingParamError('passwordConfirmation'))
   })
@@ -253,7 +252,7 @@ describe('addAccount Account Controller', () => {
         passwordConfirmation: 'invalid_password'
       }
     }
-    const httpResponse = await sut.createAccount(httpRequest, response)
+    const httpResponse = await sut.createAccount(httpRequest)
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new InvalidParamError('passwordConfirmation'))
   })
@@ -270,7 +269,7 @@ describe('addAccount Account Controller', () => {
         passwordConfirmation: 'any_pass'
       }
     }
-    const httpResponse = await sut.createAccount(httpRequest, response)
+    const httpResponse = await sut.createAccount(httpRequest)
     expect(httpResponse.statusCode).toBe(400)
     expect(httpResponse.body).toEqual(new InvalidParamError('email'))
   })
@@ -287,7 +286,7 @@ describe('addAccount Account Controller', () => {
         passwordConfirmation: 'any_pass'
       }
     }
-    await sut.createAccount(httpRequest, response)
+    await sut.createAccount(httpRequest)
     expect(isValidSpy).toHaveBeenCalledWith('any_email@mail.com')
   })
 
@@ -304,7 +303,7 @@ describe('addAccount Account Controller', () => {
         passwordConfirmation: 'any_pass'
       }
     }
-    const httpResponse = await sut.createAccount(httpRequest, response)
+    const httpResponse = await sut.createAccount(httpRequest)
     expect(httpResponse.statusCode).toBe(500)
     expect(httpResponse.body).toEqual(new ServerError())
   })
@@ -321,7 +320,7 @@ describe('addAccount Account Controller', () => {
         passwordConfirmation: 'any_pass'
       }
     }
-    await sut.createAccount(httpRequest, response)
+    await sut.createAccount(httpRequest)
     expect(addSpy).toHaveBeenCalledWith({
       name: 'any_name',
       email: 'any_email@mail.com',
@@ -342,7 +341,7 @@ describe('addAccount Account Controller', () => {
         passwordConfirmation: 'any_pass'
       }
     }
-    const httpResponse = await sut.createAccount(httpRequest, response)
+    const httpResponse = await sut.createAccount(httpRequest)
     expect(httpResponse.statusCode).toBe(500)
     expect(httpResponse.body).toEqual(new ServerError())
   })
@@ -358,7 +357,7 @@ describe('addAccount Account Controller', () => {
         passwordConfirmation: 'valid_password'
       }
     }
-    const httpResponse = await sut.createAccount(httpRequest, response)
+    const httpResponse = await sut.createAccount(httpRequest)
     expect(httpResponse.statusCode).toBe(200)
     expect(httpResponse.body).toEqual({
       id: 'valid_id',
